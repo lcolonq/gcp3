@@ -58,5 +58,8 @@
         default = gcp3;
         inherit gcp3 gcp3-lib;
       };
+      nixosModules = {
+        gcp3 = gcp3Module;
+      };
     };
 }
