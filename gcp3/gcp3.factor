@@ -8,7 +8,7 @@ TUPLE: gcp3-responder foobar ;
 M: gcp3-responder call-responder* ( path responder -- response )
     drop
     unparse \ gcp3-responder NOTICE log-message 
-    <response> 200 >>code "hello computer" >>body
+    <response> 200 >>code "hello computer" >>body "text/plain" >>content-type
     ;
 
 : serve ( -- s )
