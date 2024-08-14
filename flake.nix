@@ -21,6 +21,7 @@
       };
       gcp3 = pkgs.writeShellScriptBin "gcp3" ''
         export XDG_CACHE_HOME=/tmp/factor-cache
+        cd ${gcp3-lib}
         ${factor}/bin/factor ${gcp3-lib}/launch.factor
       '';
       gcp3Module = { config, lib, ... }:
