@@ -1,7 +1,7 @@
 USING: accessors arrays combinators images images.bitmap images.png io
 io.encodings.binary io.files io.streams.byte-array kernel math
 namespaces prettyprint sequences ;
-IN: mrtwr
+IN: gcp3.mrtwr
 
 TUPLE: hsv-pixel h s v ;
 

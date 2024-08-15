@@ -1,6 +1,6 @@
 USING: accessors combinators http http.server images.bitmap io.backend
 io.encodings.binary io.pathnames io.servers io.streams.byte-array
-kernel logging logging.server math mrtwr namespaces prettyprint ;
+kernel logging logging.server math gcp3.mrtwr namespaces prettyprint ;
 IN: gcp3
 
 "/tmp" \ log-root set-global
