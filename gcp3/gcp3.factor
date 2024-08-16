@@ -1,12 +1,21 @@
-USING: accessors combinators http http.server images.bitmap io.backend
-io.encodings.binary io.pathnames io.servers io.streams.byte-array
-kernel logging logging.server math gcp3.mrtwr namespaces prettyprint ;
+USING: accessors combinators gcp3.mrtwr http http.server images.bitmap
+io.backend io.encodings.binary io.encodings.utf8 io.files io.pathnames
+io.servers io.streams.byte-array kernel logging logging.server math
+namespaces prettyprint ;
 IN: gcp3
 
 "/tmp" \ log-root set-global
 
 SYMBOL: mrgreen
 load-mrgreen mrgreen set-global
+
+:: gcp3-respond-image ( path -- response )
+    <response>
+    200 >>code
+    binary >>content-encoding
+    "image/png" >>content-type
+    path binary file-contents >>body
+    ;
 
 TUPLE: gcp3-responder gcp3-quotient ;
 : gcp3-log ( x -- )
@@ -18,10 +27,21 @@ M: gcp3-responder call-responder* ( path responder -- response )
     { { [ dup { } = ]
         [ drop <response>
           200 >>code
-          "text/plain" >>content-type
-          "hello this is index" >>body
+          "text/html" >>content-type
+          "assets/index.html" utf8 file-contents >>body
         ]
       }
+      { [ dup { "css" } = ]
+        [ drop <response>
+          200 >>code
+          "text/css" >>content-type
+          "assets/main.css" utf8 file-contents >>body
+        ]
+      }
+      { [ dup { "mrgreen" } = ] [ drop "assets/mrgreen.png" gcp3-respond-image ] }
+      { [ dup { "mrblue" } = ] [ drop "assets/mrblue.png" gcp3-respond-image ] }
+      { [ dup { "mrred" } = ] [ drop "assets/mrred.png" gcp3-respond-image ] }
+      { [ dup { "mryellow" } = ] [ drop "assets/mryellow.png" gcp3-respond-image ] }
       { [ dup { "mr" } = ]
         [ drop <response>
           200 >>code
