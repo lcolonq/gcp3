@@ -72,6 +72,7 @@ body {
 
 .gcp3-whatitmeans-entry {
     display: grid;
+    justify-content: start;
     grid-auto-flow: column;
     margin-bottom: 1rem;
 }
